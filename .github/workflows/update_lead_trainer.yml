@@ -6,7 +6,8 @@ on:
   push:
     paths:
       - staff.html
-
+permissions:
+  contents: write
 jobs:
   update-lead-trainer:
     runs-on: ubuntu-latest
