@@ -1,0 +1,32 @@
+name: Update Lead Trainer
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  push:
+    paths:
+      - staff.html
+
+jobs:
+  update-lead-trainer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Update Lead Trainer
+        run: python update_lead_trainer.py
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add staff.html
+          git commit -m "Update Lead Trainer"
+          git push
